@@ -351,21 +351,8 @@ export default class TwoLineClockPreferences extends ExtensionPreferences {
         settings.connect('changed::date-format', syncDateFormat);
         dateGroup.add(dateFormatRow);
 
-        const formatHint = new Adw.ActionRow({
-            title: _('Syntax'),
-            subtitle: _('%d day · %m month · %Y year · %H hour · %M minutes'),
-            activatable: false,
-        });
-        addColorRow(dateGroup, settings, 'date-color', _('Color'),
-            _('Overrides the theme color.'));
-
-        dateGroup.add(new Adw.ActionRow({
-            title: _('Syntax'),
-            subtitle: _('%d day · %m month · %Y year · %H hour · %M minutes'),
-            activatable: false,
-        }));
-
         addSpinRow(dateGroup, settings, 'date-font-size', _('Size'),
+            _('In points.'), 5, 18);
             _('In points.'), 5, 18);
 
         addSpinRow(dateGroup, settings, 'date-opacity', _('Opacity'),
