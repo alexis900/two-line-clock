@@ -27,6 +27,8 @@ check() {
     [ -d schemas ] || { echo "Missing schemas/ directory" >&2; exit 1; }
     command -v glib-compile-schemas >/dev/null ||
         { echo "Missing glib-compile-schemas (package glib2-devel)" >&2; exit 1; }
+    glib-compile-schemas --strict --dry-run schemas ||
+        { echo "Invalid GSettings schema" >&2; exit 1; }
     if ls po/*.po >/dev/null 2>&1; then
         command -v msgfmt >/dev/null ||
             { echo "Missing msgfmt (package gettext)" >&2; exit 1; }
@@ -45,14 +47,13 @@ shell_cmd() {
     fi
 }
 
-# Copy the files into $1, compiling schemas and translations.
+# Copy the files into $1, without compiling anything.
 build_tree() {
     dest="$1"
     rm -rf "$dest"
     mkdir -p "$dest"
     cp $FILES "$dest/"
     cp -r schemas "$dest/"
-    glib-compile-schemas "$dest/schemas"
 
     version=$(sed -n 's/.*"version"[[:space:]]*:[[:space:]]*\([0-9][0-9]*\).*/\1/p' metadata.json | head -n1)
     commit=$(git rev-parse --short HEAD 2>/dev/null || true)
@@ -88,6 +89,9 @@ pack() {
 install() {
     check
     build_tree "$EXT_DIR"
+    # Only for the local copy: the zip must ship the .gschema.xml alone, because
+    # GNOME Shell 45+ and `gnome-extensions install` compile it themselves.
+    glib-compile-schemas "$EXT_DIR/schemas"
     echo "Installed in $EXT_DIR"
     echo "Enable it with: ./build.sh enable"
     echo "On first install, log out and back in."

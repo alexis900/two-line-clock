@@ -36,6 +36,11 @@ package manager, no test suite, no CI, no lint config. Keep it that way.
   tested with `HOME=/tmp/...` without disabling the running session.
 - Generated and never committed: `dist/`, `schemas/gschemas.compiled`, `*.mo`,
   `locale/`.
+- **Never ship `schemas/gschemas.compiled` in the zip** (extensions.gnome.org
+  rule EGO-P-006). GNOME Shell 45+ and `gnome-extensions install` compile the
+  schema themselves at install time. `build.sh pack` therefore copies only the
+  `.gschema.xml`; `build.sh install` compiles it afterwards for the local copy,
+  because a plain copy into the extensions directory does not trigger that step.
 - Schema id `org.gnome.shell.extensions.two-line-clock` (path
   `/org/gnome/shell/extensions/two-line-clock/`) must match `metadata.json`
   `settings-schema`. `getSettings()` reads `<extension>/schemas`, so the
@@ -74,7 +79,7 @@ package manager, no test suite, no CI, no lint config. Keep it that way.
 
 - Keep `README.md` (English) and `README.es.md` (Spanish) in sync. The user
   speaks Spanish and commit messages are written in Spanish.
-- `metadata.json` `version` is an integer (currently 5); GitHub releases use
+- `metadata.json` `version` is an integer (currently 6); GitHub releases use
   `vX.Y` tags and are created manually with
   `gh release create vX.Y dist/<uuid>.shell-extension.zip`. Tag names are not
   derived from that integer, and tags only exist on the remote until
