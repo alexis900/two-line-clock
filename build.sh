@@ -4,7 +4,7 @@
 
 set -eu
 
-UUID="reloj-dos-lineas@local"
+UUID="two-line-clock@alexis900.github.io"
 DIST="dist"
 ZIP="$DIST/$UUID.shell-extension.zip"
 STAGE="$DIST/stage"

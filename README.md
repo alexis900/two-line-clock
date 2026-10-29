@@ -41,7 +41,7 @@ La primera vez que se instala, GNOME Shell no descubre la extensión hasta el
 siguiente inicio de sesión. Después:
 
 ```bash
-./build.sh enable    # o: gnome-extensions enable reloj-dos-lineas@local
+./build.sh enable    # o: gnome-extensions enable two-line-clock@alexis900.github.io
 ```
 
 **Cierra sesión y vuelve a entrar** la primera vez. Las actualizaciones
@@ -53,7 +53,7 @@ JavaScript de las extensiones y `ReloadExtension` no está implementado en GNOME
 
 ```bash
 ./build.sh pack
-gnome-extensions install --force dist/reloj-dos-lineas@local.shell-extension.zip
+gnome-extensions install --force dist/two-line-clock@alexis900.github.io.shell-extension.zip
 ```
 
 ## Desinstalación

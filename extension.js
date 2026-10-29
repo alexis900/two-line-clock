@@ -95,7 +95,7 @@ export default class TwoLineClockExtension extends Extension {
                 }
             } catch (e) {
                 // Si algo falla, se mantiene el reloj original de GNOME
-                logError(e, 'reloj-dos-lineas');
+                logError(e, 'two-line-clock');
             }
         }
     }
