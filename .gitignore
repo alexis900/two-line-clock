@@ -1,3 +1,4 @@
 dist/
 *.shell-extension.zip
 .stage/
+schemas/gschemas.compiled
