@@ -9,7 +9,7 @@ DIST="dist"
 ZIP="$DIST/$UUID.shell-extension.zip"
 STAGE="$DIST/stage"
 EXT_DIR="$HOME/.local/share/gnome-shell/extensions/$UUID"
-FILES="metadata.json extension.js"
+FILES="metadata.json extension.js prefs.js"
 
 usage() {
     sed -n '2,3p' "$0" | sed 's/^# \{0,1\}//'
@@ -20,6 +20,9 @@ check() {
     for f in $FILES; do
         [ -f "$f" ] || { echo "Falta $f" >&2; exit 1; }
     done
+    [ -d schemas ] || { echo "Falta el directorio schemas/" >&2; exit 1; }
+    command -v glib-compile-schemas >/dev/null ||
+        { echo "Falta glib-compile-schemas (paquete glib2-devel)" >&2; exit 1; }
 }
 
 # Solo se habla con GNOME Shell si HOME es el del usuario real; así se puede
@@ -39,6 +42,8 @@ pack() {
     rm -rf "$STAGE" "$ZIP"
     mkdir -p "$STAGE"
     cp $FILES "$STAGE/"
+    cp -r schemas "$STAGE/"
+    glib-compile-schemas "$STAGE/schemas"
     (cd "$STAGE" && zip -qr "../$UUID.shell-extension.zip" .)
     rm -rf "$STAGE"
     echo "Creado: $ZIP"
@@ -49,6 +54,8 @@ install() {
     rm -rf "$EXT_DIR"
     mkdir -p "$EXT_DIR"
     cp $FILES "$EXT_DIR/"
+    cp -r schemas "$EXT_DIR/"
+    glib-compile-schemas "$EXT_DIR/schemas"
     echo "Instalada en $EXT_DIR"
     echo "Actívala con: ./build.sh enable"
     echo "Si es la primera vez, cierra sesión y vuelve a entrar."

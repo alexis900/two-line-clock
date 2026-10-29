@@ -3,6 +3,7 @@
   "description": "Muestra la hora y la fecha en dos líneas, al estilo de Windows 11.",
   "uuid": "two-line-clock@alexis900.github.io",
   "url": "https://github.com/alexis900/two-line-clock",
+  "settings-schema": "org.gnome.shell.extensions.two-line-clock",
   "shell-version": ["46", "47", "48", "49", "50", "51"],
-  "version": 1
+  "version": 2
 }

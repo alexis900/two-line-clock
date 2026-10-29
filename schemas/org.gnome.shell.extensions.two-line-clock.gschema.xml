@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="two-line-clock">
+
+  <schema id="org.gnome.shell.extensions.two-line-clock"
+          path="/org/gnome/shell/extensions/two-line-clock/">
+
+    <key name="clock-format" type="s">
+      <choices>
+        <choice value="system"/>
+        <choice value="24h"/>
+        <choice value="12h"/>
+      </choices>
+      <default>'system'</default>
+      <summary>Formato del reloj</summary>
+      <description>Usar el formato del sistema, forzar 24 horas o forzar 12 horas.</description>
+    </key>
+
+    <key name="show-seconds" type="b">
+      <default>false</default>
+      <summary>Mostrar segundos</summary>
+      <description>Incluye los segundos en la hora.</description>
+    </key>
+
+    <key name="time-font-size" type="i">
+      <range min="6" max="24"/>
+      <default>11</default>
+      <summary>Tamaño de la hora</summary>
+      <description>Tamaño de la hora en puntos.</description>
+    </key>
+
+    <key name="time-weight" type="s">
+      <choices>
+        <choice value="normal"/>
+        <choice value="medium"/>
+        <choice value="semibold"/>
+        <choice value="bold"/>
+      </choices>
+      <default>'semibold'</default>
+      <summary>Grosor de la hora</summary>
+      <description>Grosor de la fuente de la hora.</description>
+    </key>
+
+    <key name="show-date" type="b">
+      <default>true</default>
+      <summary>Mostrar la fecha</summary>
+      <description>Muestra la fecha en una segunda línea.</description>
+    </key>
+
+    <key name="date-font-size" type="i">
+      <range min="5" max="18"/>
+      <default>8</default>
+      <summary>Tamaño de la fecha</summary>
+      <description>Tamaño de la fecha en puntos.</description>
+    </key>
+
+    <key name="date-opacity" type="i">
+      <range min="20" max="100"/>
+      <default>75</default>
+      <summary>Opacidad de la fecha</summary>
+      <description>Opacidad de la fecha en porcentaje.</description>
+    </key>
+
+    <key name="date-format" type="s">
+      <default>'%d/%m/%Y'</default>
+      <summary>Formato de la fecha</summary>
+      <description>Formato de la fecha según la sintaxis de GLib.DateTime.format().</description>
+    </key>
+
+  </schema>
+</schemalist>

@@ -14,7 +14,9 @@ La hora va más grande y en seminegrita; la fecha, más pequeña y atenuada.
 
 - Dos líneas reales en una sola etiqueta (sin contenedores que puedan romper el
   diseño en distintas versiones de GNOME).
-- Respeta el formato de 12/24 h configurado en el sistema.
+- **Ventana de preferencias**: tamaños, grosor, opacidad, formato de fecha,
+  segundos y formato horario, sin tocar código.
+- Respeta el formato de 12/24 h configurado en el sistema (o se puede forzar).
 - Al hacer clic se sigue abriendo el calendario de GNOME.
 - Compatible con el panel estándar de GNOME y con
   [Dash to Panel](https://extensions.gnome.org/extension/1160/dash-to-panel/)
@@ -25,7 +27,9 @@ La hora va más grande y en seminegrita; la fecha, más pequeña y atenuada.
 ## Requisitos
 
 - GNOME Shell 46 – 51.
-- No necesita dependencias adicionales.
+- En tiempo de ejecución no necesita dependencias adicionales.
+- Para compilar/instalar desde el código: `glib-compile-schemas` (paquete
+  `glib2-devel` en Fedora). El zip de la release ya lo incluye compilado.
 
 ## Instalación
 
@@ -73,28 +77,46 @@ gnome-extensions install --force two-line-clock@alexis900.github.io.shell-extens
 
 ## Ajustes
 
-Los tamaños y la opacidad se definen al principio de `extension.js`:
+Abre la ventana de preferencias de la extensión:
 
-```js
-const MARKUP = (time, date) =>
-    `<span font_size="11pt" weight="600">${time}</span>\n` +
-    `<span font_size="8pt" alpha="75%">${date}</span>`;
+```bash
+gnome-extensions prefs two-line-clock@alexis900.github.io
 ```
 
-Cambia `11pt`, `8pt` y `75%` a tu gusto. Ten en cuenta que el panel debe tener
-altura suficiente para las dos líneas (40 px funcionan bien).
+O desde la aplicación **Extensiones** de GNOME, botón de configuración de
+«Reloj en dos líneas». Desde ahí puedes cambiar:
 
-La fecha usa el formato `dd/mm/yyyy`. Para cambiarlo, edita esta línea en
-`_tick()`:
+| Ajuste | Por defecto |
+| --- | --- |
+| Formato del reloj (sistema / 24 h / 12 h) | sistema |
+| Mostrar segundos | no |
+| Tamaño de la hora | 11 pt |
+| Grosor de la hora | seminegrita |
+| Mostrar la fecha | sí |
+| Formato de la fecha | `%d/%m/%Y` |
+| Tamaño de la fecha | 8 pt |
+| Opacidad de la fecha | 75 % |
 
-```js
-const date = now.format('%d/%m/%Y');
+El formato de fecha sigue la sintaxis de
+[GLib.DateTime.format](https://docs.gtk.org/glib/method.DateTime.format.html):
+`%d` día, `%m` mes, `%Y` año, `%H` hora, `%M` minutos, `%A` día de la semana.
+
+Los valores también se pueden cambiar por línea de comandos:
+
+```bash
+gsettings --schemadir ~/.local/share/gnome-shell/extensions/two-line-clock@alexis900.github.io/schemas \
+  set org.gnome.shell.extensions.two-line-clock time-font-size 12
 ```
+
+Ten en cuenta que el panel debe tener altura suficiente para las dos líneas
+(40 px funcionan bien).
 
 ## Estructura
 
 ```
 extension.js    Código de la extensión
+prefs.js        Ventana de preferencias
+schemas/        Esquema GSettings con los ajustes
 metadata.json   Metadatos (uuid, versiones de GNOME compatibles)
 build.sh        Empaquetado, instalación y desinstalación
 ```

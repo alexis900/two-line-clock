@@ -6,14 +6,25 @@ import Pango from 'gi://Pango';
 import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
-const MARKUP = (time, date) =>
-    `<span font_size="11pt" weight="600">${time}</span>\n` +
-    `<span font_size="8pt" alpha="75%">${date}</span>`;
+const SCHEMA_ID = 'org.gnome.shell.extensions.two-line-clock';
+
+const WEIGHTS = {
+    normal: 400,
+    medium: 500,
+    semibold: 600,
+    bold: 700,
+};
+
+const escape = text => GLib.markup_escape_text(text, -1);
 
 export default class TwoLineClockExtension extends Extension {
     enable() {
-        this._settings = new Gio.Settings({schema_id: 'org.gnome.desktop.interface'});
-        this._formatSignal = this._settings.connect('changed::clock-format', () => this._tick(true));
+        this._settings = this.getSettings(SCHEMA_ID);
+        this._interface = new Gio.Settings({schema_id: 'org.gnome.desktop.interface'});
+
+        this._settingsSignal = this._settings.connect('changed', () => this._tick(true));
+        this._formatSignal = this._interface.connect('changed::clock-format', () => this._tick(true));
+
         this._labels = new Map();
         this._timer = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 1, () => {
             this._tick();
@@ -27,8 +38,12 @@ export default class TwoLineClockExtension extends Extension {
             GLib.source_remove(this._timer);
             this._timer = null;
         }
+        if (this._settingsSignal) {
+            this._settings.disconnect(this._settingsSignal);
+            this._settingsSignal = null;
+        }
         if (this._formatSignal) {
-            this._settings.disconnect(this._formatSignal);
+            this._interface.disconnect(this._formatSignal);
             this._formatSignal = null;
         }
         for (const [clockDisplay, data] of this._labels) {
@@ -42,6 +57,7 @@ export default class TwoLineClockExtension extends Extension {
         this._labels.clear();
         this._labels = null;
         this._settings = null;
+        this._interface = null;
     }
 
     _panels() {
@@ -72,12 +88,44 @@ export default class TwoLineClockExtension extends Extension {
         return data;
     }
 
+    _formatTime(now) {
+        const format = this._settings.get_string('clock-format');
+        const system24h = this._interface.get_string('clock-format') === '24h';
+        const is24h = format === 'system' ? system24h : format === '24h';
+        const seconds = this._settings.get_boolean('show-seconds');
+
+        if (is24h)
+            return now.format(seconds ? '%-H:%M:%S' : '%-H:%M');
+        return now.format(seconds ? '%-I:%M:%S %p' : '%-I:%M %p');
+    }
+
+    _buildMarkup(now) {
+        const time = this._formatTime(now);
+        const timeSize = this._settings.get_int('time-font-size');
+        const weight = WEIGHTS[this._settings.get_string('time-weight')] ?? 600;
+
+        let markup = `<span font_size="${timeSize}pt" weight="${weight}">${escape(time)}</span>`;
+
+        if (this._settings.get_boolean('show-date')) {
+            const dateFormat = this._settings.get_string('date-format');
+            let date;
+            try {
+                date = now.format(dateFormat);
+            } catch {
+                date = now.format('%d/%m/%Y');
+            }
+
+            const dateSize = this._settings.get_int('date-font-size');
+            const opacity = this._settings.get_int('date-opacity');
+            markup += `\n<span font_size="${dateSize}pt" alpha="${opacity}%">${escape(date)}</span>`;
+        }
+
+        return markup;
+    }
+
     _tick(force = false) {
         const now = GLib.DateTime.new_now_local();
-        const is24h = this._settings.get_string('clock-format') === '24h';
-        const time = now.format(is24h ? '%-H:%M' : '%-I:%M %p');
-        const date = now.format('%d/%m/%Y');
-        const markup = MARKUP(time, date);
+        const markup = this._buildMarkup(now);
 
         for (const panel of this._panels()) {
             const clockDisplay = panel.statusArea?.dateMenu?._clockDisplay;
