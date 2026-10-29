@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: two-line-clock 1.4\n"
+"Project-Id-Version: two-line-clock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-29 14:25+0100\n"
+"POT-Creation-Date: 2026-10-29 15:04+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,130 +17,194 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: prefs.js:85
+#: prefs.js:170
 msgid "System"
 msgstr ""
 
-#: prefs.js:86
+#: prefs.js:171
 msgid "24-hour"
 msgstr ""
 
-#: prefs.js:87
+#: prefs.js:172
 msgid "12-hour"
 msgstr ""
 
-#: prefs.js:90
+#: prefs.js:175
 msgid "Normal"
 msgstr ""
 
-#: prefs.js:91
+#: prefs.js:176
 msgid "Medium"
 msgstr ""
 
-#: prefs.js:92
+#: prefs.js:177
 msgid "Semibold"
 msgstr ""
 
-#: prefs.js:93
+#: prefs.js:178
 msgid "Bold"
 msgstr ""
 
-#: prefs.js:99
+#: prefs.js:184
 msgid "Clock"
 msgstr ""
 
-#: prefs.js:105
+#: prefs.js:190
+msgid "Presets"
+msgstr ""
+
+#: prefs.js:191
+msgid "Apply a combination of settings at once."
+msgstr ""
+
+#: prefs.js:197
+msgid "Windows 11"
+msgstr ""
+
+#: prefs.js:198
+msgid "14 pt time, 9 pt date, semibold."
+msgstr ""
+
+#: prefs.js:213
+msgid "Compact"
+msgstr ""
+
+#: prefs.js:214
+msgid "10 pt time, 7 pt date, medium weight."
+msgstr ""
+
+#: prefs.js:226
+msgid "Time only"
+msgstr ""
+
+#: prefs.js:227
+msgid "Hides the date and enlarges the time."
+msgstr ""
+
+#: prefs.js:244
+msgid "Apply"
+msgstr ""
+
+#: prefs.js:251
+msgid "Preset applied"
+msgstr ""
+
+#: prefs.js:261
+msgid "Restore defaults"
+msgstr ""
+
+#: prefs.js:262
+msgid "Resets every option to its default value."
+msgstr ""
+
+#: prefs.js:266
+msgid "Reset"
+msgstr ""
+
+#: prefs.js:274
+msgid "Settings reset"
+msgstr ""
+
+#: prefs.js:283
 msgid "Time"
 msgstr ""
 
-#: prefs.js:106
+#: prefs.js:284
 msgid "Appearance of the first line."
 msgstr ""
 
-#: prefs.js:110
+#: prefs.js:288
 msgid "Format"
 msgstr ""
 
-#: prefs.js:111
+#: prefs.js:289
 msgid "“System” follows the GNOME setting."
 msgstr ""
 
-#: prefs.js:113 prefs.js:160
+#: prefs.js:291 prefs.js:341
 msgid "Size"
 msgstr ""
 
-#: prefs.js:114 prefs.js:161
+#: prefs.js:292 prefs.js:342
 msgid "In points."
 msgstr ""
 
-#: prefs.js:116
+#: prefs.js:294
 msgid "Weight"
 msgstr ""
 
-#: prefs.js:117
+#: prefs.js:295
 msgid "Font weight."
 msgstr ""
 
-#: prefs.js:120
+#: prefs.js:297 prefs.js:347
+msgid "Color"
+msgstr ""
+
+#: prefs.js:298 prefs.js:348
+msgid "Overrides the theme color."
+msgstr ""
+
+#: prefs.js:301
 msgid "Show seconds"
 msgstr ""
 
-#: prefs.js:121
+#: prefs.js:302
 msgid "Adds seconds to the time."
 msgstr ""
 
-#: prefs.js:127
+#: prefs.js:308
 msgid "Date"
 msgstr ""
 
-#: prefs.js:128
+#: prefs.js:309
 msgid "Appearance of the second line."
 msgstr ""
 
-#: prefs.js:133
+#: prefs.js:314
 msgid "Show date"
 msgstr ""
 
-#: prefs.js:134
+#: prefs.js:315
 msgid "Turn off to show only the time."
 msgstr ""
 
-#: prefs.js:140
+#: prefs.js:321
 msgid "Date format"
 msgstr ""
 
-#: prefs.js:154
+#: prefs.js:335
 msgid "Syntax"
 msgstr ""
 
-#: prefs.js:155
+#: prefs.js:336
 msgid "%d day · %m month · %Y year · %H hour · %M minutes"
 msgstr ""
 
-#: prefs.js:163
+#: prefs.js:344
 msgid "Opacity"
 msgstr ""
 
-#: prefs.js:164
+#: prefs.js:345
 msgid "Percentage."
 msgstr ""
 
-#: prefs.js:166
+#: prefs.js:350
 msgid "About"
 msgstr ""
 
-#: prefs.js:170
+#: prefs.js:354
 msgid "Version"
 msgstr ""
 
-#: prefs.js:177
+#: prefs.js:361
 msgid "Commit"
 msgstr ""
 
-#: prefs.js:178
+#: prefs.js:362
 msgid "Unknown"
 msgstr ""
 
-#: prefs.js:192
+#: prefs.js:376
 msgid "Repository"
 msgstr ""
