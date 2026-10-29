@@ -1,0 +1,8 @@
+{
+  "name": "Reloj en dos líneas",
+  "description": "Muestra la hora y la fecha en dos líneas, al estilo de Windows 11.",
+  "uuid": "reloj-dos-lineas@local",
+  "url": "https://github.com/alexis900/two-line-clock",
+  "shell-version": ["46", "47", "48", "49", "50", "51"],
+  "version": 1
+}
