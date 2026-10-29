@@ -79,7 +79,7 @@ package manager, no test suite, no CI, no lint config. Keep it that way.
 
 - Keep `README.md` (English) and `README.es.md` (Spanish) in sync. The user
   speaks Spanish and commit messages are written in Spanish.
-- `metadata.json` `version` is an integer (currently 6); GitHub releases use
+- `metadata.json` `version` is an integer (currently 7); GitHub releases use
   `vX.Y` tags and are created manually with
   `gh release create vX.Y dist/<uuid>.shell-extension.zip`. Tag names are not
   derived from that integer, and tags only exist on the remote until
