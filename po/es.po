@@ -1,0 +1,133 @@
+# Spanish translations for two-line-clock.
+# Copyright (C) 2026 Alejandro Martin Perez
+# This file is distributed under the same license as the two-line-clock package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: two-line-clock 1.2\n"
+"Report-Msgid-Bugs-To: https://github.com/alexis900/two-line-clock/issues\n"
+"POT-Creation-Date: 2026-10-29 14:16+0100\n"
+"PO-Revision-Date: 2026-10-29 14:16+0100\n"
+"Last-Translator: Alejandro Martin Perez <alexandermpf77@gmail.com>\n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: prefs.js:14
+msgid "System"
+msgstr "Sistema"
+
+#: prefs.js:15
+msgid "24-hour"
+msgstr "24 horas"
+
+#: prefs.js:16
+msgid "12-hour"
+msgstr "12 horas"
+
+#: prefs.js:20
+msgid "Normal"
+msgstr "Normal"
+
+#: prefs.js:21
+msgid "Medium"
+msgstr "Media"
+
+#: prefs.js:22
+msgid "Semibold"
+msgstr "Seminegrita"
+
+#: prefs.js:23
+msgid "Bold"
+msgstr "Negrita"
+
+#: prefs.js:85
+msgid "Clock"
+msgstr "Reloj"
+
+#: prefs.js:91
+msgid "Time"
+msgstr "Hora"
+
+#: prefs.js:92
+msgid "Appearance of the first line."
+msgstr "Aspecto de la primera línea."
+
+#: prefs.js:96
+msgid "Format"
+msgstr "Formato"
+
+#: prefs.js:97
+msgid "“System” follows the GNOME setting."
+msgstr "«Sistema» sigue el ajuste de GNOME."
+
+#: prefs.js:99 prefs.js:146
+msgid "Size"
+msgstr "Tamaño"
+
+#: prefs.js:100 prefs.js:147
+msgid "In points."
+msgstr "En puntos."
+
+#: prefs.js:102
+msgid "Weight"
+msgstr "Grosor"
+
+#: prefs.js:103
+msgid "Font weight."
+msgstr "Peso de la fuente."
+
+#: prefs.js:106
+msgid "Show seconds"
+msgstr "Mostrar segundos"
+
+#: prefs.js:107
+msgid "Adds seconds to the time."
+msgstr "Añade los segundos a la hora."
+
+#: prefs.js:113
+msgid "Date"
+msgstr "Fecha"
+
+#: prefs.js:114
+msgid "Appearance of the second line."
+msgstr "Aspecto de la segunda línea."
+
+#: prefs.js:119
+msgid "Show date"
+msgstr "Mostrar la fecha"
+
+#: prefs.js:120
+msgid "Turn off to show only the time."
+msgstr "Desactívalo para dejar solo la hora."
+
+#: prefs.js:126
+msgid "Date format"
+msgstr "Formato de la fecha"
+
+#: prefs.js:140
+msgid "Syntax"
+msgstr "Sintaxis"
+
+#: prefs.js:141
+msgid "%d day · %m month · %Y year · %H hour · %M minutes"
+msgstr "%d día · %m mes · %Y año · %H hora · %M minutos"
+
+#: prefs.js:149
+msgid "Opacity"
+msgstr "Opacidad"
+
+#: prefs.js:150
+msgid "Percentage."
+msgstr "Porcentaje."
+
+#: prefs.js:152
+msgid "About"
+msgstr "Acerca de"
+
+#: prefs.js:156
+msgid "Repository"
+msgstr "Repositorio"

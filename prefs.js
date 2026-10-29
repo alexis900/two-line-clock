@@ -3,21 +3,24 @@ import Gdk from 'gi://Gdk';
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 
-import {ExtensionPreferences} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import {
+    ExtensionPreferences,
+    gettext as _,
+} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
 const SCHEMA_ID = 'org.gnome.shell.extensions.two-line-clock';
 
 const CLOCK_FORMATS = [
-    ['system', 'Sistema'],
-    ['24h', '24 horas'],
-    ['12h', '12 horas'],
+    ['system', _('System')],
+    ['24h', _('24-hour')],
+    ['12h', _('12-hour')],
 ];
 
 const WEIGHTS = [
-    ['normal', 'Normal'],
-    ['medium', 'Media'],
-    ['semibold', 'Seminegrita'],
-    ['bold', 'Negrita'],
+    ['normal', _('Normal')],
+    ['medium', _('Medium')],
+    ['semibold', _('Semibold')],
+    ['bold', _('Bold')],
 ];
 
 function addComboRow(group, settings, key, title, subtitle, choices) {
@@ -79,48 +82,48 @@ export default class TwoLineClockPreferences extends ExtensionPreferences {
         window.search_enabled = true;
 
         const page = new Adw.PreferencesPage({
-            title: 'Reloj',
+            title: _('Clock'),
             icon_name: 'preferences-system-time-symbolic',
         });
         window.add(page);
 
         const timeGroup = new Adw.PreferencesGroup({
-            title: 'Hora',
-            description: 'Aspecto de la primera línea.',
+            title: _('Time'),
+            description: _('Appearance of the first line.'),
         });
         page.add(timeGroup);
 
-        addComboRow(timeGroup, settings, 'clock-format', 'Formato',
-            '«Sistema» sigue el ajuste de GNOME.', CLOCK_FORMATS);
+        addComboRow(timeGroup, settings, 'clock-format', _('Format'),
+            _('“System” follows the GNOME setting.'), CLOCK_FORMATS);
 
-        addSpinRow(timeGroup, settings, 'time-font-size', 'Tamaño',
-            'En puntos.', 6, 24);
+        addSpinRow(timeGroup, settings, 'time-font-size', _('Size'),
+            _('In points.'), 6, 24);
 
-        addComboRow(timeGroup, settings, 'time-weight', 'Grosor',
-            'Peso de la fuente.', WEIGHTS);
+        addComboRow(timeGroup, settings, 'time-weight', _('Weight'),
+            _('Font weight.'), WEIGHTS);
 
         const secondsRow = new Adw.SwitchRow({
-            title: 'Mostrar segundos',
-            subtitle: 'Añade los segundos a la hora.',
+            title: _('Show seconds'),
+            subtitle: _('Adds seconds to the time.'),
         });
         settings.bind('show-seconds', secondsRow, 'active', Gio.SettingsBindFlags.DEFAULT);
         timeGroup.add(secondsRow);
 
         const dateGroup = new Adw.PreferencesGroup({
-            title: 'Fecha',
-            description: 'Aspecto de la segunda línea.',
+            title: _('Date'),
+            description: _('Appearance of the second line.'),
         });
         page.add(dateGroup);
 
         const showDateRow = new Adw.SwitchRow({
-            title: 'Mostrar la fecha',
-            subtitle: 'Desactívalo para dejar solo la hora.',
+            title: _('Show date'),
+            subtitle: _('Turn off to show only the time.'),
         });
         settings.bind('show-date', showDateRow, 'active', Gio.SettingsBindFlags.DEFAULT);
         dateGroup.add(showDateRow);
 
         const formatRow = new Adw.EntryRow({
-            title: 'Formato de la fecha',
+            title: _('Date format'),
             text: settings.get_string('date-format'),
             show_apply_button: true,
         });
@@ -134,23 +137,23 @@ export default class TwoLineClockPreferences extends ExtensionPreferences {
         dateGroup.add(formatRow);
 
         const formatHint = new Adw.ActionRow({
-            title: 'Sintaxis',
-            subtitle: '%d día · %m mes · %Y año · %H hora · %M minutos',
+            title: _('Syntax'),
+            subtitle: _('%d day · %m month · %Y year · %H hour · %M minutes'),
             activatable: false,
         });
         dateGroup.add(formatHint);
 
-        addSpinRow(dateGroup, settings, 'date-font-size', 'Tamaño',
-            'En puntos.', 5, 18);
+        addSpinRow(dateGroup, settings, 'date-font-size', _('Size'),
+            _('In points.'), 5, 18);
 
-        addSpinRow(dateGroup, settings, 'date-opacity', 'Opacidad',
-            'Porcentaje.', 20, 100);
+        addSpinRow(dateGroup, settings, 'date-opacity', _('Opacity'),
+            _('Percentage.'), 20, 100);
 
-        const aboutGroup = new Adw.PreferencesGroup({title: 'Acerca de'});
+        const aboutGroup = new Adw.PreferencesGroup({title: _('About')});
         page.add(aboutGroup);
 
         const repoRow = new Adw.ActionRow({
-            title: 'Repositorio',
+            title: _('Repository'),
             subtitle: 'github.com/alexis900/two-line-clock',
             activatable: true,
         });

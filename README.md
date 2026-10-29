@@ -1,39 +1,42 @@
-# Reloj en dos líneas
+# Two-line clock
 
-Extensión para GNOME Shell que muestra la **hora y la fecha en dos líneas** en el
-panel, con el estilo del reloj de Windows 11:
+GNOME Shell extension that shows the **time and date on two lines** in the panel,
+in the style of the Windows 11 clock:
 
 ```
 14:01
 29/10/2026
 ```
 
-La hora va más grande y en seminegrita; la fecha, más pequeña y atenuada.
+The time is larger and semibold; the date is smaller and dimmed.
 
-## Características
+*Read this in [Spanish](README.es.md).*
 
-- Dos líneas reales en una sola etiqueta (sin contenedores que puedan romper el
-  diseño en distintas versiones de GNOME).
-- **Ventana de preferencias**: tamaños, grosor, opacidad, formato de fecha,
-  segundos y formato horario, sin tocar código.
-- Respeta el formato de 12/24 h configurado en el sistema (o se puede forzar).
-- Al hacer clic se sigue abriendo el calendario de GNOME.
-- Compatible con el panel estándar de GNOME y con
-  [Dash to Panel](https://extensions.gnome.org/extension/1160/dash-to-panel/)
-  (incluidos varios monitores).
-- Si algo falla, el reloj original de GNOME se mantiene visible: la extensión
-  solo lo oculta mientras funciona correctamente.
+## Features
 
-## Requisitos
+- Two real lines rendered with a single `St.Label` (no containers that can break
+  the layout across GNOME versions).
+- **Preferences window**: sizes, weight, opacity, date format, seconds and clock
+  format, without touching any code.
+- Respects the system 12/24-hour setting, or can force either one.
+- Clicking the clock still opens the GNOME calendar.
+- Works with the default GNOME panel and with
+  [Dash to Panel](https://extensions.gnome.org/extension/1160/dash-to-panel/),
+  including multiple monitors.
+- If anything fails, GNOME's original clock stays visible: the extension only
+  hides it while it is working.
+
+## Requirements
 
 - GNOME Shell 46 – 51.
-- En tiempo de ejecución no necesita dependencias adicionales.
-- Para compilar/instalar desde el código: `glib-compile-schemas` (paquete
-  `glib2-devel` en Fedora). El zip de la release ya lo incluye compilado.
+- No runtime dependencies.
+- To build or install from source: `glib-compile-schemas` (package `glib2-devel`
+  on Fedora) and `msgfmt` (package `gettext`). The release zip already includes
+  the compiled files.
 
-## Instalación
+## Installation
 
-### Desde el repositorio
+### From the repository
 
 ```bash
 git clone https://github.com/alexis900/two-line-clock.git
@@ -41,95 +44,105 @@ cd two-line-clock
 ./build.sh install
 ```
 
-La primera vez que se instala, GNOME Shell no descubre la extensión hasta el
-siguiente inicio de sesión. Después:
+GNOME Shell does not discover new extensions until the next login. Then:
 
 ```bash
-./build.sh enable    # o: gnome-extensions enable two-line-clock@alexis900.github.io
+./build.sh enable    # or: gnome-extensions enable two-line-clock@alexis900.github.io
 ```
 
-**Cierra sesión y vuelve a entrar** la primera vez. Las actualizaciones
-posteriores del código también requieren reiniciar la sesión: GNOME cachea el
-JavaScript de las extensiones y `ReloadExtension` no está implementado en GNOME
-51.
+**Log out and back in** the first time. Later code updates also require a
+session restart: GNOME caches extension JavaScript and `ReloadExtension` is not
+implemented in GNOME 51.
 
-### Instalación manual
+### Manual installation
 
 ```bash
 ./build.sh pack
 gnome-extensions install --force dist/two-line-clock@alexis900.github.io.shell-extension.zip
 ```
 
-### Desde la release (sin git)
+### From the release (no git)
 
-Descarga el `.zip` de la última
-[release](https://github.com/alexis900/two-line-clock/releases/latest) y ejecuta:
+Download the `.zip` from the latest
+[release](https://github.com/alexis900/two-line-clock/releases/latest) and run:
 
 ```bash
 gnome-extensions install --force two-line-clock@alexis900.github.io.shell-extension.zip
 ```
 
-## Desinstalación
+## Uninstallation
 
 ```bash
 ./build.sh uninstall
 ```
 
-## Ajustes
+## Settings
 
-Abre la ventana de preferencias de la extensión:
+Open the extension preferences:
 
 ```bash
 gnome-extensions prefs two-line-clock@alexis900.github.io
 ```
 
-O desde la aplicación **Extensiones** de GNOME, botón de configuración de
-«Reloj en dos líneas». Desde ahí puedes cambiar:
+Or use GNOME's **Extensions** app and click the settings button next to
+“Two-line clock”. Available options:
 
-| Ajuste | Por defecto |
+| Setting | Default |
 | --- | --- |
-| Formato del reloj (sistema / 24 h / 12 h) | sistema |
-| Mostrar segundos | no |
-| Tamaño de la hora | 11 pt |
-| Grosor de la hora | seminegrita |
-| Mostrar la fecha | sí |
-| Formato de la fecha | `%d/%m/%Y` |
-| Tamaño de la fecha | 8 pt |
-| Opacidad de la fecha | 75 % |
+| Clock format (system / 24-hour / 12-hour) | system |
+| Show seconds | off |
+| Time size | 11 pt |
+| Time weight | semibold |
+| Show date | on |
+| Date format | `%d/%m/%Y` |
+| Date size | 8 pt |
+| Date opacity | 75 % |
 
-El formato de fecha sigue la sintaxis de
-[GLib.DateTime.format](https://docs.gtk.org/glib/method.DateTime.format.html):
-`%d` día, `%m` mes, `%Y` año, `%H` hora, `%M` minutos, `%A` día de la semana.
+The date format follows
+[GLib.DateTime.format](https://docs.gtk.org/glib/method.DateTime.format.html)
+syntax: `%d` day, `%m` month, `%Y` year, `%H` hour, `%M` minutes, `%A` weekday.
 
-Los valores también se pueden cambiar por línea de comandos:
+Values can also be changed from the command line:
 
 ```bash
 gsettings --schemadir ~/.local/share/gnome-shell/extensions/two-line-clock@alexis900.github.io/schemas \
   set org.gnome.shell.extensions.two-line-clock time-font-size 12
 ```
 
-Ten en cuenta que el panel debe tener altura suficiente para las dos líneas
-(40 px funcionan bien).
+The panel must be tall enough for two lines (40 px works well).
 
-## Estructura
+## Structure
 
 ```
-extension.js    Código de la extensión
-prefs.js        Ventana de preferencias
-schemas/        Esquema GSettings con los ajustes
-metadata.json   Metadatos (uuid, versiones de GNOME compatibles)
-build.sh        Empaquetado, instalación y desinstalación
+extension.js    Extension code
+prefs.js        Preferences window
+schemas/        GSettings schema with the settings
+po/             Translations (Spanish included)
+metadata.json   Metadata (uuid, supported GNOME versions)
+build.sh        Packaging, installation and uninstallation
 ```
 
-## Notas de compatibilidad
+## Translations
 
-- **GNOME 51**: `St.BoxLayout` ya no acepta la propiedad `vertical`; la
-  orientación vertical de un `St.BoxLayout` tampoco se aplicó de forma fiable,
-  por eso las dos líneas se dibujan con Pango dentro de un único `St.Label`.
-- El tamaño del panel no lo controla esta extensión. Con Dash to Panel, la
-  altura se ajusta con `panel-size` y hay que vaciar `panel-sizes` si existe un
-  valor por monitor que la anule.
+Source strings are in English. To add a language, create `po/<lang>.po` (you can
+start from `po/two-line-clock.pot`) and run `./build.sh pack`; the compiled
+catalogue is included automatically.
 
-## Licencia
+To refresh the template after changing strings:
 
-GPL-2.0-or-later. Consulta [LICENSE](LICENSE).
+```bash
+xgettext --language=JavaScript --from-code=UTF-8 --keyword=_ \
+  --package-name=two-line-clock -o po/two-line-clock.pot prefs.js
+```
+
+## Compatibility notes
+
+- **GNOME 51**: `St.BoxLayout` no longer accepts a `vertical` property, and its
+  vertical orientation did not apply reliably, so both lines are drawn with
+  Pango markup inside a single `St.Label`.
+- The panel size is not controlled by this extension. With Dash to Panel, set
+  `panel-size` and clear `panel-sizes` if a per-monitor value overrides it.
+
+## License
+
+GPL-2.0-or-later. See [LICENSE](LICENSE).
