@@ -317,26 +317,53 @@ export default class TwoLineClockPreferences extends ExtensionPreferences {
         settings.bind('show-date', showDateRow, 'active', Gio.SettingsBindFlags.DEFAULT);
         dateGroup.add(showDateRow);
 
-        const formatRow = new Adw.EntryRow({
+        const dateFormatChoices = [
+            ['%d/%m/%Y', _('DD/MM/YYYY')],
+            ['%m/%d/%Y', _('MM/DD/YYYY')],
+            ['%Y-%m-%d', _('YYYY-MM-DD (ISO)')],
+            ['%d-%m-%Y', _('DD-MM-YYYY')],
+            ['%Y/%m/%d', _('YYYY/MM/DD')],
+        ];
+
+        const dateFormatRow = new Adw.ComboRow({
             title: _('Date format'),
-            text: settings.get_string('date-format'),
-            show_apply_button: true,
+            subtitle: _('Choose a preset format.'),
+            model: Gtk.StringList.new(dateFormatChoices.map(([, label]) => label)),
         });
-        formatRow.connect('apply', () => {
-            settings.set_string('date-format', formatRow.text);
+
+        const syncDateFormat = () => {
+            const value = settings.get_string('date-format');
+            if (dateFormatChoices.some(([fmt]) => fmt === value)) {
+                const index = dateFormatChoices.findIndex(([fmt]) => fmt === value);
+                dateFormatRow.selected = index >= 0 ? index : 0;
+                return;
+            }
+            // Valores personalizados (compatibles con versiones anteriores)
+            dateFormatRow.selected = dateFormatChoices.length - 1 >= 0 ? 0 : 0;
+        };
+
+        syncDateFormat();
+        dateFormatRow.connect('notify::selected', () => {
+            const choice = dateFormatChoices[dateFormatRow.selected];
+            if (choice && settings.get_string('date-format') !== choice[0])
+                settings.set_string('date-format', choice[0]);
         });
-        settings.connect('changed::date-format', () => {
-            if (formatRow.text !== settings.get_string('date-format'))
-                formatRow.text = settings.get_string('date-format');
-        });
-        dateGroup.add(formatRow);
+        settings.connect('changed::date-format', syncDateFormat);
+        dateGroup.add(dateFormatRow);
 
         const formatHint = new Adw.ActionRow({
             title: _('Syntax'),
             subtitle: _('%d day · %m month · %Y year · %H hour · %M minutes'),
             activatable: false,
         });
-        dateGroup.add(formatHint);
+        addColorRow(dateGroup, settings, 'date-color', _('Color'),
+            _('Overrides the theme color.'));
+
+        dateGroup.add(new Adw.ActionRow({
+            title: _('Syntax'),
+            subtitle: _('%d day · %m month · %Y year · %H hour · %M minutes'),
+            activatable: false,
+        }));
 
         addSpinRow(dateGroup, settings, 'date-font-size', _('Size'),
             _('In points.'), 5, 18);
