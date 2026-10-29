@@ -6,5 +6,5 @@
   "settings-schema": "org.gnome.shell.extensions.two-line-clock",
   "gettext-domain": "two-line-clock",
   "shell-version": ["46", "47", "48", "49", "50", "51"],
-  "version": 3
+  "version": 4
 }

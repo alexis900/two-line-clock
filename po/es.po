@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: two-line-clock 1.2\n"
-"Report-Msgid-Bugs-To: https://github.com/alexis900/two-line-clock/issues\n"
-"POT-Creation-Date: 2026-10-29 14:16+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-29 14:23+0100\n"
 "PO-Revision-Date: 2026-10-29 14:16+0100\n"
 "Last-Translator: Alejandro Martin Perez <alexandermpf77@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -44,90 +44,102 @@ msgstr "Seminegrita"
 msgid "Bold"
 msgstr "Negrita"
 
-#: prefs.js:85
+#: prefs.js:98
 msgid "Clock"
 msgstr "Reloj"
 
-#: prefs.js:91
+#: prefs.js:104
 msgid "Time"
 msgstr "Hora"
 
-#: prefs.js:92
+#: prefs.js:105
 msgid "Appearance of the first line."
 msgstr "Aspecto de la primera línea."
 
-#: prefs.js:96
+#: prefs.js:109
 msgid "Format"
 msgstr "Formato"
 
-#: prefs.js:97
+#: prefs.js:110
 msgid "“System” follows the GNOME setting."
 msgstr "«Sistema» sigue el ajuste de GNOME."
 
-#: prefs.js:99 prefs.js:146
+#: prefs.js:112 prefs.js:159
 msgid "Size"
 msgstr "Tamaño"
 
-#: prefs.js:100 prefs.js:147
+#: prefs.js:113 prefs.js:160
 msgid "In points."
 msgstr "En puntos."
 
-#: prefs.js:102
+#: prefs.js:115
 msgid "Weight"
 msgstr "Grosor"
 
-#: prefs.js:103
+#: prefs.js:116
 msgid "Font weight."
 msgstr "Peso de la fuente."
 
-#: prefs.js:106
+#: prefs.js:119
 msgid "Show seconds"
 msgstr "Mostrar segundos"
 
-#: prefs.js:107
+#: prefs.js:120
 msgid "Adds seconds to the time."
 msgstr "Añade los segundos a la hora."
 
-#: prefs.js:113
+#: prefs.js:126
 msgid "Date"
 msgstr "Fecha"
 
-#: prefs.js:114
+#: prefs.js:127
 msgid "Appearance of the second line."
 msgstr "Aspecto de la segunda línea."
 
-#: prefs.js:119
+#: prefs.js:132
 msgid "Show date"
 msgstr "Mostrar la fecha"
 
-#: prefs.js:120
+#: prefs.js:133
 msgid "Turn off to show only the time."
 msgstr "Desactívalo para dejar solo la hora."
 
-#: prefs.js:126
+#: prefs.js:139
 msgid "Date format"
 msgstr "Formato de la fecha"
 
-#: prefs.js:140
+#: prefs.js:153
 msgid "Syntax"
 msgstr "Sintaxis"
 
-#: prefs.js:141
+#: prefs.js:154
 msgid "%d day · %m month · %Y year · %H hour · %M minutes"
 msgstr "%d día · %m mes · %Y año · %H hora · %M minutos"
 
-#: prefs.js:149
+#: prefs.js:162
 msgid "Opacity"
 msgstr "Opacidad"
 
-#: prefs.js:150
+#: prefs.js:163
 msgid "Percentage."
 msgstr "Porcentaje."
 
-#: prefs.js:152
+#: prefs.js:165
 msgid "About"
 msgstr "Acerca de"
 
-#: prefs.js:156
+#: prefs.js:169
+msgid "Version"
+msgstr "Versión"
+
+#: prefs.js:176
+msgid "Commit"
+msgstr "Commit"
+
+#: prefs.js:177
+msgid "Unknown"
+msgstr "Desconocido"
+
+#: prefs.js:191
 msgid "Repository"
 msgstr "Repositorio"

@@ -4,6 +4,9 @@
 
 set -eu
 
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+cd "$SCRIPT_DIR"
+
 UUID="two-line-clock@alexis900.github.io"
 DOMAIN="two-line-clock"
 DIST="dist"
@@ -50,6 +53,18 @@ build_tree() {
     cp $FILES "$dest/"
     cp -r schemas "$dest/"
     glib-compile-schemas "$dest/schemas"
+
+    version=$(sed -n 's/.*"version"[[:space:]]*:[[:space:]]*\([0-9][0-9]*\).*/\1/p' metadata.json | head -n1)
+    commit=$(git rev-parse --short HEAD 2>/dev/null || true)
+    [ -n "$commit" ] || commit=unknown
+    date=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+    cat > "$dest/build-info.json" <<EOF
+{
+  "version": ${version:-0},
+  "commit": "$commit",
+  "date": "$date"
+}
+EOF
 
     if ls po/*.po >/dev/null 2>&1; then
         for po in po/*.po; do

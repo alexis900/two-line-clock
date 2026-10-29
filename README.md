@@ -109,6 +109,9 @@ gsettings --schemadir ~/.local/share/gnome-shell/extensions/two-line-clock@alexi
   set org.gnome.shell.extensions.two-line-clock time-font-size 12
 ```
 
+The **About** section shows the extension version and the commit it was built
+from, with a link to that commit on GitHub.
+
 The panel must be tall enough for two lines (40 px works well).
 
 ## Structure

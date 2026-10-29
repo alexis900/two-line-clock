@@ -47,8 +47,7 @@ function addComboRow(group, settings, key, title, subtitle, choices) {
     return row;
 }
 
-function addSpinRow(group, settings, key, title, subtitle, lower, upper) {
-    const row = new Adw.SpinRow({
+function addSpinRow(group, settings, key, title, subtitle, lower, upper) {    const row = new Adw.SpinRow({
         title,
         subtitle,
         adjustment: new Gtk.Adjustment({
@@ -75,9 +74,23 @@ function addSpinRow(group, settings, key, title, subtitle, lower, upper) {
     return row;
 }
 
+function readBuildInfo(dir) {
+    try {
+        const file = dir.get_child('build-info.json');
+        if (!file.query_exists(null))
+            return {};
+
+        const [, contents] = file.load_contents(null);
+        return JSON.parse(new TextDecoder().decode(contents));
+    } catch {
+        return {};
+    }
+}
+
 export default class TwoLineClockPreferences extends ExtensionPreferences {
     fillPreferencesWindow(window) {
         const settings = this.getSettings(SCHEMA_ID);
+        const buildInfo = readBuildInfo(this.dir);
 
         window.search_enabled = true;
 
@@ -151,6 +164,28 @@ export default class TwoLineClockPreferences extends ExtensionPreferences {
 
         const aboutGroup = new Adw.PreferencesGroup({title: _('About')});
         page.add(aboutGroup);
+
+        aboutGroup.add(new Adw.ActionRow({
+            title: _('Version'),
+            subtitle: `${buildInfo.version ?? this.metadata.version ?? '—'}`,
+            activatable: false,
+        }));
+
+        const commit = buildInfo.commit;
+        const commitRow = new Adw.ActionRow({
+            title: _('Commit'),
+            subtitle: commit || _('Unknown'),
+            activatable: Boolean(commit),
+        });
+        if (commit) {
+            commitRow.add_suffix(new Gtk.Image({icon_name: 'adw-external-link-symbolic'}));
+            commitRow.connect('activated', () => {
+                Gtk.show_uri(window,
+                    `https://github.com/alexis900/two-line-clock/commit/${commit}`,
+                    Gdk.CURRENT_TIME);
+            });
+        }
+        aboutGroup.add(commitRow);
 
         const repoRow = new Adw.ActionRow({
             title: _('Repository'),
