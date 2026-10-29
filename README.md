@@ -56,6 +56,15 @@ JavaScript de las extensiones y `ReloadExtension` no está implementado en GNOME
 gnome-extensions install --force dist/two-line-clock@alexis900.github.io.shell-extension.zip
 ```
 
+### Desde la release (sin git)
+
+Descarga el `.zip` de la última
+[release](https://github.com/alexis900/two-line-clock/releases/latest) y ejecuta:
+
+```bash
+gnome-extensions install --force two-line-clock@alexis900.github.io.shell-extension.zip
+```
+
 ## Desinstalación
 
 ```bash
