@@ -22,6 +22,18 @@ check() {
     done
 }
 
+# Solo se habla con GNOME Shell si HOME es el del usuario real; así se puede
+# probar el script con un HOME temporal sin afectar a la sesión en uso.
+have_session() {
+    [ "$HOME" = "$(getent passwd "$(id -u)" | cut -d: -f6)" ]
+}
+
+shell_cmd() {
+    if have_session; then
+        "$@" 2>/dev/null || true
+    fi
+}
+
 pack() {
     check
     rm -rf "$STAGE" "$ZIP"
@@ -46,12 +58,16 @@ case "${1:-pack}" in
     pack)      pack ;;
     install)   install ;;
     enable)
-        gnome-extensions enable "$UUID" 2>/dev/null ||
-            echo "GNOME aún no conoce la extensión: cierra sesión y vuelve a entrar."
+        if have_session; then
+            gnome-extensions enable "$UUID" 2>/dev/null ||
+                echo "GNOME aún no conoce la extensión: cierra sesión y vuelve a entrar."
+        else
+            echo "HOME temporal: no se toca la sesión de GNOME."
+        fi
         ;;
-    disable)   gnome-extensions disable "$UUID" 2>/dev/null || true ;;
+    disable)   shell_cmd gnome-extensions disable "$UUID" ;;
     uninstall)
-        gnome-extensions disable "$UUID" 2>/dev/null || true
+        shell_cmd gnome-extensions disable "$UUID"
         rm -rf "$EXT_DIR"
         echo "Extensión eliminada de $EXT_DIR"
         ;;
