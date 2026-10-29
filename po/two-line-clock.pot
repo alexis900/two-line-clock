@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: two-line-clock 1.3\n"
+"Project-Id-Version: two-line-clock 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-29 14:23+0100\n"
+"POT-Creation-Date: 2026-10-29 14:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,130 +17,130 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: prefs.js:14
+#: prefs.js:85
 msgid "System"
 msgstr ""
 
-#: prefs.js:15
+#: prefs.js:86
 msgid "24-hour"
 msgstr ""
 
-#: prefs.js:16
+#: prefs.js:87
 msgid "12-hour"
 msgstr ""
 
-#: prefs.js:20
+#: prefs.js:90
 msgid "Normal"
 msgstr ""
 
-#: prefs.js:21
+#: prefs.js:91
 msgid "Medium"
 msgstr ""
 
-#: prefs.js:22
+#: prefs.js:92
 msgid "Semibold"
 msgstr ""
 
-#: prefs.js:23
+#: prefs.js:93
 msgid "Bold"
 msgstr ""
 
-#: prefs.js:98
+#: prefs.js:99
 msgid "Clock"
 msgstr ""
 
-#: prefs.js:104
+#: prefs.js:105
 msgid "Time"
 msgstr ""
 
-#: prefs.js:105
+#: prefs.js:106
 msgid "Appearance of the first line."
 msgstr ""
 
-#: prefs.js:109
+#: prefs.js:110
 msgid "Format"
 msgstr ""
 
-#: prefs.js:110
+#: prefs.js:111
 msgid "“System” follows the GNOME setting."
 msgstr ""
 
-#: prefs.js:112 prefs.js:159
+#: prefs.js:113 prefs.js:160
 msgid "Size"
 msgstr ""
 
-#: prefs.js:113 prefs.js:160
+#: prefs.js:114 prefs.js:161
 msgid "In points."
 msgstr ""
 
-#: prefs.js:115
+#: prefs.js:116
 msgid "Weight"
 msgstr ""
 
-#: prefs.js:116
+#: prefs.js:117
 msgid "Font weight."
 msgstr ""
 
-#: prefs.js:119
+#: prefs.js:120
 msgid "Show seconds"
 msgstr ""
 
-#: prefs.js:120
+#: prefs.js:121
 msgid "Adds seconds to the time."
 msgstr ""
 
-#: prefs.js:126
+#: prefs.js:127
 msgid "Date"
 msgstr ""
 
-#: prefs.js:127
+#: prefs.js:128
 msgid "Appearance of the second line."
 msgstr ""
 
-#: prefs.js:132
+#: prefs.js:133
 msgid "Show date"
 msgstr ""
 
-#: prefs.js:133
+#: prefs.js:134
 msgid "Turn off to show only the time."
 msgstr ""
 
-#: prefs.js:139
+#: prefs.js:140
 msgid "Date format"
 msgstr ""
 
-#: prefs.js:153
+#: prefs.js:154
 msgid "Syntax"
 msgstr ""
 
-#: prefs.js:154
+#: prefs.js:155
 msgid "%d day · %m month · %Y year · %H hour · %M minutes"
 msgstr ""
 
-#: prefs.js:162
+#: prefs.js:163
 msgid "Opacity"
 msgstr ""
 
-#: prefs.js:163
+#: prefs.js:164
 msgid "Percentage."
 msgstr ""
 
-#: prefs.js:165
+#: prefs.js:166
 msgid "About"
 msgstr ""
 
-#: prefs.js:169
+#: prefs.js:170
 msgid "Version"
 msgstr ""
 
-#: prefs.js:176
+#: prefs.js:177
 msgid "Commit"
 msgstr ""
 
-#: prefs.js:177
+#: prefs.js:178
 msgid "Unknown"
 msgstr ""
 
-#: prefs.js:191
+#: prefs.js:192
 msgid "Repository"
 msgstr ""

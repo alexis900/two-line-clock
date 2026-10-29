@@ -9,19 +9,7 @@ import {
 } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
 const SCHEMA_ID = 'org.gnome.shell.extensions.two-line-clock';
-
-const CLOCK_FORMATS = [
-    ['system', _('System')],
-    ['24h', _('24-hour')],
-    ['12h', _('12-hour')],
-];
-
-const WEIGHTS = [
-    ['normal', _('Normal')],
-    ['medium', _('Medium')],
-    ['semibold', _('Semibold')],
-    ['bold', _('Bold')],
-];
+const GETTEXT_DOMAIN = 'two-line-clock';
 
 function addComboRow(group, settings, key, title, subtitle, choices) {
     const row = new Adw.ComboRow({
@@ -89,8 +77,28 @@ function readBuildInfo(dir) {
 
 export default class TwoLineClockPreferences extends ExtensionPreferences {
     fillPreferencesWindow(window) {
+        // The prefs service builds this object from the metadata the shell
+        // loaded at login. If that copy predates `gettext-domain`, the domain
+        // falls back to the UUID and the translations in locale/ never load,
+        // until the next logout/login. Rebinding here avoids that.
+        this.initTranslations(GETTEXT_DOMAIN);
+
         const settings = this.getSettings(SCHEMA_ID);
         const buildInfo = readBuildInfo(this.dir);
+
+        // gettext must not be called at module scope: the wrapper can only
+        // resolve the extension once GNOME has loaded it, so translate here.
+        const clockFormats = [
+            ['system', _('System')],
+            ['24h', _('24-hour')],
+            ['12h', _('12-hour')],
+        ];
+        const weights = [
+            ['normal', _('Normal')],
+            ['medium', _('Medium')],
+            ['semibold', _('Semibold')],
+            ['bold', _('Bold')],
+        ];
 
         window.search_enabled = true;
 
@@ -107,13 +115,13 @@ export default class TwoLineClockPreferences extends ExtensionPreferences {
         page.add(timeGroup);
 
         addComboRow(timeGroup, settings, 'clock-format', _('Format'),
-            _('“System” follows the GNOME setting.'), CLOCK_FORMATS);
+            _('“System” follows the GNOME setting.'), clockFormats);
 
         addSpinRow(timeGroup, settings, 'time-font-size', _('Size'),
             _('In points.'), 6, 24);
 
         addComboRow(timeGroup, settings, 'time-weight', _('Weight'),
-            _('Font weight.'), WEIGHTS);
+            _('Font weight.'), weights);
 
         const secondsRow = new Adw.SwitchRow({
             title: _('Show seconds'),

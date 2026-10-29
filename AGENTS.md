@@ -50,6 +50,19 @@ package manager, no test suite, no CI, no lint config. Keep it that way.
 - Source strings are English and live only in `prefs.js`, wrapped in `_()`.
   `po/es.po` has the Spanish translation. `metadata.json` name/description are
   not translatable.
+- **Never call `_()` at module scope** (e.g. in top-level constants). The
+  gettext wrapper locates the extension from the call stack and throws
+  `Error: gettext can only be called from extensions`, which makes the prefs
+  window fail to open. Build the choice arrays inside
+  `fillPreferencesWindow()`.
+- Call `this.initTranslations(GETTEXT_DOMAIN)` at the top of
+  `fillPreferencesWindow()`. The prefs service receives the metadata the shell
+  loaded **at login**; if that copy predates `gettext-domain`, the domain
+  silently falls back to the UUID, the `.mo` is not found and the window shows
+  English until a logout — even though `locale/es/...` is installed and correct.
+- The version shown for the extension in GNOME's Extensions app also comes from
+  that login-time metadata (stale after bumping `metadata.json`); the About row
+  reads `build-info.json` from disk, so it is always current.
 - After changing UI strings:
   `xgettext --language=JavaScript --from-code=UTF-8 --keyword=_ --package-name=two-line-clock -o po/two-line-clock.pot prefs.js`,
   then `msgmerge --update po/es.po po/two-line-clock.pot` and translate the new
@@ -61,7 +74,7 @@ package manager, no test suite, no CI, no lint config. Keep it that way.
 
 - Keep `README.md` (English) and `README.es.md` (Spanish) in sync. The user
   speaks Spanish and commit messages are written in Spanish.
-- `metadata.json` `version` is an integer (currently 4); GitHub releases use
+- `metadata.json` `version` is an integer (currently 5); GitHub releases use
   `vX.Y` tags and are created manually with
   `gh release create vX.Y dist/<uuid>.shell-extension.zip`. Tag names are not
   derived from that integer, and tags only exist on the remote until
