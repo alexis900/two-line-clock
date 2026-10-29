@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: two-line-clock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-29 15:04+0100\n"
+"POT-Creation-Date: 2026-10-29 15:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -121,11 +121,11 @@ msgstr ""
 msgid "“System” follows the GNOME setting."
 msgstr ""
 
-#: prefs.js:291 prefs.js:341
+#: prefs.js:291 prefs.js:354
 msgid "Size"
 msgstr ""
 
-#: prefs.js:292 prefs.js:342
+#: prefs.js:292 prefs.js:355
 msgid "In points."
 msgstr ""
 
@@ -137,11 +137,11 @@ msgstr ""
 msgid "Font weight."
 msgstr ""
 
-#: prefs.js:297 prefs.js:347
+#: prefs.js:297 prefs.js:360
 msgid "Color"
 msgstr ""
 
-#: prefs.js:298 prefs.js:348
+#: prefs.js:298 prefs.js:361
 msgid "Overrides the theme color."
 msgstr ""
 
@@ -170,41 +170,57 @@ msgid "Turn off to show only the time."
 msgstr ""
 
 #: prefs.js:321
+msgid "DD/MM/YYYY"
+msgstr ""
+
+#: prefs.js:322
+msgid "MM/DD/YYYY"
+msgstr ""
+
+#: prefs.js:323
+msgid "YYYY-MM-DD (ISO)"
+msgstr ""
+
+#: prefs.js:324
+msgid "DD-MM-YYYY"
+msgstr ""
+
+#: prefs.js:325
+msgid "YYYY/MM/DD"
+msgstr ""
+
+#: prefs.js:329
 msgid "Date format"
 msgstr ""
 
-#: prefs.js:335
-msgid "Syntax"
+#: prefs.js:330
+msgid "Choose a preset format."
 msgstr ""
 
-#: prefs.js:336
-msgid "%d day · %m month · %Y year · %H hour · %M minutes"
-msgstr ""
-
-#: prefs.js:344
+#: prefs.js:357
 msgid "Opacity"
 msgstr ""
 
-#: prefs.js:345
+#: prefs.js:358
 msgid "Percentage."
 msgstr ""
 
-#: prefs.js:350
+#: prefs.js:363
 msgid "About"
 msgstr ""
 
-#: prefs.js:354
+#: prefs.js:367
 msgid "Version"
 msgstr ""
 
-#: prefs.js:361
+#: prefs.js:374
 msgid "Commit"
 msgstr ""
 
-#: prefs.js:362
+#: prefs.js:375
 msgid "Unknown"
 msgstr ""
 
-#: prefs.js:376
+#: prefs.js:389
 msgid "Repository"
 msgstr ""
