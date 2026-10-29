@@ -1,0 +1,210 @@
+# French translations for two-line-clock package.
+# Copyright (C) 2026 THE two-line-clock'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the two-line-clock package.
+# amartinper <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: two-line-clock\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-29 15:04+0100\n"
+"PO-Revision-Date: 2026-10-29 15:32+0100\n"
+"Last-Translator: amartinper <EMAIL@ADDRESS>\n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: prefs.js:170
+msgid "System"
+msgstr "Système"
+
+#: prefs.js:171
+msgid "24-hour"
+msgstr "24 heures"
+
+#: prefs.js:172
+msgid "12-hour"
+msgstr "12 heures"
+
+#: prefs.js:175
+msgid "Normal"
+msgstr ""
+
+#: prefs.js:176
+msgid "Medium"
+msgstr ""
+
+#: prefs.js:177
+msgid "Semibold"
+msgstr ""
+
+#: prefs.js:178
+msgid "Bold"
+msgstr ""
+
+#: prefs.js:184
+msgid "Clock"
+msgstr ""
+
+#: prefs.js:190
+msgid "Presets"
+msgstr "Préréglages"
+
+#: prefs.js:191
+msgid "Apply a combination of settings at once."
+msgstr "Appliquer plusieurs paramètres à la fois."
+
+#: prefs.js:197
+msgid "Windows 11"
+msgstr "Windows 11"
+
+#: prefs.js:198
+msgid "14 pt time, 9 pt date, semibold."
+msgstr "Heure 14 pt, date 9 pt, semi-gras."
+
+#: prefs.js:213
+msgid "Compact"
+msgstr "Compact"
+
+#: prefs.js:214
+msgid "10 pt time, 7 pt date, medium weight."
+msgstr "Heure 10 pt, date 7 pt, poids moyen."
+
+#: prefs.js:226
+msgid "Time only"
+msgstr "Heure uniquement"
+
+#: prefs.js:227
+msgid "Hides the date and enlarges the time."
+msgstr "Masque la date et agrandit l'heure."
+
+#: prefs.js:244
+msgid "Apply"
+msgstr "Appliquer"
+
+#: prefs.js:251
+msgid "Preset applied"
+msgstr "Préréglage appliqué"
+
+#: prefs.js:261
+msgid "Restore defaults"
+msgstr "Restaurer les valeurs par défaut"
+
+#: prefs.js:262
+msgid "Resets every option to its default value."
+msgstr "Réinitialise toutes les options."
+
+#: prefs.js:266
+msgid "Reset"
+msgstr "Réinitialiser"
+
+#: prefs.js:274
+msgid "Settings reset"
+msgstr "Paramètres réinitialisés"
+
+#: prefs.js:283
+msgid "Time"
+msgstr ""
+
+#: prefs.js:284
+msgid "Appearance of the first line."
+msgstr ""
+
+#: prefs.js:288
+msgid "Format"
+msgstr ""
+
+#: prefs.js:289
+msgid "“System” follows the GNOME setting."
+msgstr ""
+
+#: prefs.js:291 prefs.js:341
+msgid "Size"
+msgstr ""
+
+#: prefs.js:292 prefs.js:342
+msgid "In points."
+msgstr ""
+
+#: prefs.js:294
+msgid "Weight"
+msgstr ""
+
+#: prefs.js:295
+msgid "Font weight."
+msgstr ""
+
+#: prefs.js:297 prefs.js:347
+msgid "Color"
+msgstr "Couleur"
+
+#: prefs.js:298 prefs.js:348
+msgid "Overrides the theme color."
+msgstr "Remplace la couleur du thème."
+
+#: prefs.js:301
+msgid "Show seconds"
+msgstr ""
+
+#: prefs.js:302
+msgid "Adds seconds to the time."
+msgstr ""
+
+#: prefs.js:308
+msgid "Date"
+msgstr ""
+
+#: prefs.js:309
+msgid "Appearance of the second line."
+msgstr ""
+
+#: prefs.js:314
+msgid "Show date"
+msgstr ""
+
+#: prefs.js:315
+msgid "Turn off to show only the time."
+msgstr ""
+
+#: prefs.js:321
+msgid "Date format"
+msgstr "Format de date"
+
+#: prefs.js:335
+msgid "Syntax"
+msgstr ""
+
+#: prefs.js:336
+msgid "%d day · %m month · %Y year · %H hour · %M minutes"
+msgstr ""
+
+#: prefs.js:344
+msgid "Opacity"
+msgstr ""
+
+#: prefs.js:345
+msgid "Percentage."
+msgstr ""
+
+#: prefs.js:350
+msgid "About"
+msgstr ""
+
+#: prefs.js:354
+msgid "Version"
+msgstr ""
+
+#: prefs.js:361
+msgid "Commit"
+msgstr ""
+
+#: prefs.js:362
+msgid "Unknown"
+msgstr ""
+
+#: prefs.js:376
+msgid "Repository"
+msgstr ""

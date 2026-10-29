@@ -21,8 +21,11 @@ La hora va más grande y en seminegrita; la fecha, más pequeña y atenuada.
 
 - Dos líneas reales dibujadas con un único `St.Label` (sin contenedores que
   puedan romper el diseño en distintas versiones de GNOME).
-- **Ventana de preferencias**: tamaños, grosor, opacidad, formato de fecha,
-  segundos y formato horario, sin tocar código.
+- **Ventana de preferencias**: preajustes (`Windows 11`, `Compacto`, `Solo
+  hora`), tamaños y grosor de fuente, colores personalizados para hora y fecha,
+  formatos predefinidos de fecha (`DD/MM/YYYY`, `MM/DD/YYYY`, `YYYY-MM-DD`),
+  segundos y formato horario.
+- **Información emergente**: muestra la fecha completa al pasar el ratón.
 - Respeta el formato de 12/24 h del sistema, o se puede forzar.
 - Al hacer clic se sigue abriendo el calendario de GNOME.
 - Compatible con el panel estándar de GNOME y con
@@ -30,6 +33,7 @@ La hora va más grande y en seminegrita; la fecha, más pequeña y atenuada.
   incluidos varios monitores.
 - Si algo falla, el reloj original de GNOME se mantiene visible: la extensión
   solo lo oculta mientras funciona correctamente.
+- Lógica de formato extraída a `lib.js` con pruebas unitarias (`gjs -m tests/lib.test.js`).
 
 ## Requisitos
 

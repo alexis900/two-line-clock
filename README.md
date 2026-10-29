@@ -21,8 +21,10 @@ The time is larger and semibold; the date is smaller and dimmed.
 
 - Two real lines rendered with a single `St.Label` (no containers that can break
   the layout across GNOME versions).
-- **Preferences window**: sizes, weight, opacity, date format, seconds and clock
-  format, without touching any code.
+- **Preferences window**: presets (`Windows 11`, `Compact`, `Time only`), font
+  sizes and weight, custom colors for time and date, date format presets
+  (`DD/MM/YYYY`, `MM/DD/YYYY`, `YYYY-MM-DD`), seconds and clock format.
+- **Tooltip**: shows the full long date on hover.
 - Respects the system 12/24-hour setting, or can force either one.
 - Clicking the clock still opens the GNOME calendar.
 - Works with the default GNOME panel and with
@@ -30,6 +32,7 @@ The time is larger and semibold; the date is smaller and dimmed.
   including multiple monitors.
 - If anything fails, GNOME's original clock stays visible: the extension only
   hides it while it is working.
+- Extracted formatting logic into `lib.js` with unit tests (`gjs -m tests/lib.test.js`).
 
 ## Requirements
 
