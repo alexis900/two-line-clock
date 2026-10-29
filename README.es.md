@@ -12,6 +12,11 @@ La hora va más grande y en seminegrita; la fecha, más pequeña y atenuada.
 
 *Read this in [English](README.md).*
 
+## Capturas
+
+![Ventana de preferencias](screenshots/preferences.png)
+![Reloj en el panel](screenshots/clock.png)
+
 ## Características
 
 - Dos líneas reales dibujadas con un único `St.Label` (sin contenedores que

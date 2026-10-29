@@ -12,6 +12,11 @@ The time is larger and semibold; the date is smaller and dimmed.
 
 *Read this in [Spanish](README.es.md).*
 
+## Screenshots
+
+![Preferences window](screenshots/preferences.png)
+![Clock in the panel](screenshots/clock.png)
+
 ## Features
 
 - Two real lines rendered with a single `St.Label` (no containers that can break
