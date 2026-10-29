@@ -13,7 +13,7 @@ DIST="dist"
 ZIP="$DIST/$UUID.shell-extension.zip"
 STAGE="$DIST/stage"
 EXT_DIR="$HOME/.local/share/gnome-shell/extensions/$UUID"
-FILES="metadata.json extension.js prefs.js"
+FILES="metadata.json extension.js prefs.js lib.js"
 
 usage() {
     sed -n '2,3p' "$0" | sed 's/^# \{0,1\}//'

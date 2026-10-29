@@ -35,7 +35,8 @@ function addComboRow(group, settings, key, title, subtitle, choices) {
     return row;
 }
 
-function addSpinRow(group, settings, key, title, subtitle, lower, upper) {    const row = new Adw.SpinRow({
+function addSpinRow(group, settings, key, title, subtitle, lower, upper) {
+    const row = new Adw.SpinRow({
         title,
         subtitle,
         adjustment: new Gtk.Adjustment({
@@ -75,6 +76,83 @@ function readBuildInfo(dir) {
     }
 }
 
+function applyValues(settings, values) {
+    for (const [key, value] of Object.entries(values)) {
+        if (typeof value === 'boolean')
+            settings.set_boolean(key, value);
+        else if (typeof value === 'number')
+            settings.set_int(key, value);
+        else
+            settings.set_string(key, value);
+    }
+}
+
+function parseColor(value) {
+    const rgba = new Gdk.RGBA();
+    if (value && rgba.parse(value))
+        return rgba;
+
+    rgba.parse('#ffffff');
+    return rgba;
+}
+
+function colorToHex(rgba) {
+    const channel = value => Math.round(Math.min(1, Math.max(0, value)) * 255)
+        .toString(16)
+        .padStart(2, '0');
+
+    return `#${channel(rgba.red)}${channel(rgba.green)}${channel(rgba.blue)}`;
+}
+
+// The setting holds #rrggbb, and an empty string means "use the theme color".
+// A switch row keeps that state explicit instead of adding a second key.
+function addColorRow(group, settings, key, title, subtitle) {
+    const row = new Adw.SwitchRow({title, subtitle});
+    const button = new Gtk.ColorDialogButton({
+        dialog: new Gtk.ColorDialog({title, with_alpha: false}),
+        valign: Gtk.Align.CENTER,
+    });
+    row.add_suffix(button);
+
+    let syncing = false;
+
+    const sync = () => {
+        syncing = true;
+        const value = settings.get_string(key);
+        row.active = value !== '';
+        button.sensitive = row.active;
+        button.rgba = parseColor(value);
+        syncing = false;
+    };
+
+    row.connect('notify::active', () => {
+        if (syncing)
+            return;
+
+        if (row.active) {
+            const hex = colorToHex(button.rgba);
+            if (settings.get_string(key) !== hex)
+                settings.set_string(key, hex);
+        } else if (settings.get_string(key) !== '') {
+            settings.set_string(key, '');
+        }
+    });
+
+    button.connect('notify::rgba', () => {
+        if (syncing || !row.active)
+            return;
+
+        const hex = colorToHex(button.rgba);
+        if (settings.get_string(key) !== hex)
+            settings.set_string(key, hex);
+    });
+
+    settings.connect(`changed::${key}`, sync);
+    sync();
+    group.add(row);
+    return row;
+}
+
 export default class TwoLineClockPreferences extends ExtensionPreferences {
     fillPreferencesWindow(window) {
         // The prefs service builds this object from the metadata the shell
@@ -108,6 +186,99 @@ export default class TwoLineClockPreferences extends ExtensionPreferences {
         });
         window.add(page);
 
+        const presetGroup = new Adw.PreferencesGroup({
+            title: _('Presets'),
+            description: _('Apply a combination of settings at once.'),
+        });
+        page.add(presetGroup);
+
+        const presets = [
+            {
+                title: _('Windows 11'),
+                subtitle: _('14 pt time, 9 pt date, semibold.'),
+                values: {
+                    'clock-format': 'system',
+                    'show-seconds': false,
+                    'time-font-size': 14,
+                    'time-weight': 'semibold',
+                    'time-color': '',
+                    'show-date': true,
+                    'date-font-size': 9,
+                    'date-opacity': 90,
+                    'date-color': '',
+                    'date-format': '%d/%m/%Y',
+                },
+            },
+            {
+                title: _('Compact'),
+                subtitle: _('10 pt time, 7 pt date, medium weight.'),
+                values: {
+                    'time-font-size': 10,
+                    'time-weight': 'medium',
+                    'time-color': '',
+                    'show-date': true,
+                    'date-font-size': 7,
+                    'date-opacity': 70,
+                    'date-color': '',
+                },
+            },
+            {
+                title: _('Time only'),
+                subtitle: _('Hides the date and enlarges the time.'),
+                values: {
+                    'show-seconds': false,
+                    'time-font-size': 13,
+                    'time-weight': 'semibold',
+                    'show-date': false,
+                },
+            },
+        ];
+
+        for (const preset of presets) {
+            const row = new Adw.ActionRow({
+                title: preset.title,
+                subtitle: preset.subtitle,
+                activatable: true,
+            });
+            const apply = new Gtk.Button({
+                label: _('Apply'),
+                valign: Gtk.Align.CENTER,
+            });
+            apply.add_css_class('flat');
+
+            const activate = () => {
+                applyValues(settings, preset.values);
+                window.add_toast(new Adw.Toast({title: _('Preset applied')}));
+            };
+
+            apply.connect('clicked', activate);
+            row.connect('activated', activate);
+            row.add_suffix(apply);
+            presetGroup.add(row);
+        }
+
+        const resetRow = new Adw.ActionRow({
+            title: _('Restore defaults'),
+            subtitle: _('Resets every option to its default value.'),
+            activatable: true,
+        });
+        const reset = new Gtk.Button({
+            label: _('Reset'),
+            valign: Gtk.Align.CENTER,
+        });
+        reset.add_css_class('flat');
+
+        const resetAll = () => {
+            for (const key of settings.settings_schema.list_keys())
+                settings.reset(key);
+            window.add_toast(new Adw.Toast({title: _('Settings reset')}));
+        };
+
+        reset.connect('clicked', resetAll);
+        resetRow.connect('activated', resetAll);
+        resetRow.add_suffix(reset);
+        presetGroup.add(resetRow);
+
         const timeGroup = new Adw.PreferencesGroup({
             title: _('Time'),
             description: _('Appearance of the first line.'),
@@ -122,6 +293,9 @@ export default class TwoLineClockPreferences extends ExtensionPreferences {
 
         addComboRow(timeGroup, settings, 'time-weight', _('Weight'),
             _('Font weight.'), weights);
+
+        addColorRow(timeGroup, settings, 'time-color', _('Color'),
+            _('Overrides the theme color.'));
 
         const secondsRow = new Adw.SwitchRow({
             title: _('Show seconds'),
@@ -169,6 +343,9 @@ export default class TwoLineClockPreferences extends ExtensionPreferences {
 
         addSpinRow(dateGroup, settings, 'date-opacity', _('Opacity'),
             _('Percentage.'), 20, 100);
+
+        addColorRow(dateGroup, settings, 'date-color', _('Color'),
+            _('Overrides the theme color.'));
 
         const aboutGroup = new Adw.PreferencesGroup({title: _('About')});
         page.add(aboutGroup);

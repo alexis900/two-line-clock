@@ -6,16 +6,9 @@ import Pango from 'gi://Pango';
 import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
+import {buildMarkup, tooltipText} from './lib.js';
+
 const SCHEMA_ID = 'org.gnome.shell.extensions.two-line-clock';
-
-const WEIGHTS = {
-    normal: 400,
-    medium: 500,
-    semibold: 600,
-    bold: 700,
-};
-
-const escape = text => GLib.markup_escape_text(text, -1);
 
 export default class TwoLineClockExtension extends Extension {
     enable() {
@@ -83,49 +76,35 @@ export default class TwoLineClockExtension extends Extension {
         clockDisplay.get_parent().insert_child_below(label, clockDisplay);
         clockDisplay.hide();
 
-        const data = {label, markup: ''};
+        const data = {label, markup: '', tooltip: ''};
         this._labels.set(clockDisplay, data);
         return data;
     }
 
-    _formatTime(now) {
-        const format = this._settings.get_string('clock-format');
-        const system24h = this._interface.get_string('clock-format') === '24h';
-        const is24h = format === 'system' ? system24h : format === '24h';
-        const seconds = this._settings.get_boolean('show-seconds');
-
-        if (is24h)
-            return now.format(seconds ? '%-H:%M:%S' : '%-H:%M');
-        return now.format(seconds ? '%-I:%M:%S %p' : '%-I:%M %p');
+    _options() {
+        return {
+            clockFormat: this._settings.get_string('clock-format'),
+            system24h: this._interface.get_string('clock-format') === '24h',
+            showSeconds: this._settings.get_boolean('show-seconds'),
+            timeSize: this._settings.get_int('time-font-size'),
+            timeWeight: this._settings.get_string('time-weight'),
+            timeColor: this._settings.get_string('time-color'),
+            showDate: this._settings.get_boolean('show-date'),
+            dateSize: this._settings.get_int('date-font-size'),
+            dateOpacity: this._settings.get_int('date-opacity'),
+            dateColor: this._settings.get_string('date-color'),
+            dateFormat: this._settings.get_string('date-format'),
+        };
     }
 
     _buildMarkup(now) {
-        const time = this._formatTime(now);
-        const timeSize = this._settings.get_int('time-font-size');
-        const weight = WEIGHTS[this._settings.get_string('time-weight')] ?? 600;
-
-        let markup = `<span font_size="${timeSize}pt" weight="${weight}">${escape(time)}</span>`;
-
-        if (this._settings.get_boolean('show-date')) {
-            const dateFormat = this._settings.get_string('date-format');
-            let date;
-            try {
-                date = now.format(dateFormat);
-            } catch {
-                date = now.format('%d/%m/%Y');
-            }
-
-            const dateSize = this._settings.get_int('date-font-size');
-            const opacity = this._settings.get_int('date-opacity');
-            markup += `\n<span font_size="${dateSize}pt" alpha="${opacity}%">${escape(date)}</span>`;
-        }
-
-        return markup;
+        return buildMarkup(now, this._options());
     }
 
     _tick(force = false) {
         const now = GLib.DateTime.new_now_local();
         const markup = this._buildMarkup(now);
+        const tooltip = tooltipText(now);
 
         for (const panel of this._panels()) {
             const clockDisplay = panel.statusArea?.dateMenu?._clockDisplay;
@@ -140,6 +119,11 @@ export default class TwoLineClockExtension extends Extension {
                 if (force || data.markup !== markup) {
                     data.label.clutter_text.set_markup(markup);
                     data.markup = markup;
+                }
+
+                if (force || data.tooltip !== tooltip) {
+                    data.label.set_tooltip_text(tooltip);
+                    data.tooltip = tooltip;
                 }
             } catch (e) {
                 // Si algo falla, se mantiene el reloj original de GNOME
