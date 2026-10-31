@@ -51,8 +51,12 @@ export default class TwoLineClockExtension extends Extension {
 
     _panels() {
         const panels = [Main.panel];
-        if (global.dashToPanel?.panels)
-            panels.push(...global.dashToPanel.panels.map(pw => pw.panel));
+        if (global.dashToPanel?.panels) {
+            for (const pw of global.dashToPanel.panels) {
+                if (pw.panel)
+                    panels.push(pw.panel);
+            }
+        }
         return panels;
     }
 
