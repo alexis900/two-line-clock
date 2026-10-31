@@ -353,7 +353,6 @@ export default class TwoLineClockPreferences extends ExtensionPreferences {
 
         addSpinRow(dateGroup, settings, 'date-font-size', _('Size'),
             _('In points.'), 5, 18);
-            _('In points.'), 5, 18);
 
         addSpinRow(dateGroup, settings, 'date-opacity', _('Opacity'),
             _('Percentage.'), 20, 100);
