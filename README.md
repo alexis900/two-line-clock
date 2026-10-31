@@ -41,6 +41,8 @@ The time is larger and semibold; the date is smaller and dimmed.
 
 ## Installation
 
+[![Get it on GNOME Extensions](https://img.shields.io/badge/Install%20from-GNOME%20Extensions-4A86CF?logo=gnome&logoColor=white)](https://extensions.gnome.org/extension/11543/two-line-clock/)
+
 ### From the repository
 
 ```bash

@@ -41,6 +41,8 @@ La hora va más grande y en seminegrita; la fecha, más pequeña y atenuada.
 
 ## Instalación
 
+[![Instalar desde GNOME Extensions](https://img.shields.io/badge/Instalar%20desde-GNOME%20Extensions-4A86CF?logo=gnome&logoColor=white)](https://extensions.gnome.org/extension/11543/two-line-clock/)
+
 ### Desde el repositorio
 
 ```bash
