@@ -40,11 +40,7 @@ export default class TwoLineClockExtension extends Extension {
             this._formatSignal = null;
         }
         for (const [clockDisplay, data] of this._labels) {
-            try {
-                clockDisplay.show();
-            } catch {
-                // el panel pudo destruirse antes de desactivar
-            }
+            clockDisplay.show();
             data.label.destroy();
         }
         this._labels.clear();
@@ -55,12 +51,8 @@ export default class TwoLineClockExtension extends Extension {
 
     _panels() {
         const panels = [Main.panel];
-        try {
-            if (global.dashToPanel?.panels)
-                panels.push(...global.dashToPanel.panels.map(pw => pw.panel));
-        } catch {
-            // Dash to Panel no disponible: solo el panel principal
-        }
+        if (global.dashToPanel?.panels)
+            panels.push(...global.dashToPanel.panels.map(pw => pw.panel));
         return panels;
     }
 
@@ -111,23 +103,18 @@ export default class TwoLineClockExtension extends Extension {
             if (!clockDisplay)
                 continue;
 
-            try {
-                let data = this._labels.get(clockDisplay);
-                if (!data)
-                    data = this._createLabel(clockDisplay);
+            let data = this._labels.get(clockDisplay);
+            if (!data)
+                data = this._createLabel(clockDisplay);
 
-                if (force || data.markup !== markup) {
-                    data.label.clutter_text.set_markup(markup);
-                    data.markup = markup;
-                }
+            if (force || data.markup !== markup) {
+                data.label.clutter_text.set_markup(markup);
+                data.markup = markup;
+            }
 
-                if (force || data.tooltip !== tooltip) {
-                    data.label.set_tooltip_text(tooltip);
-                    data.tooltip = tooltip;
-                }
-            } catch (e) {
-                // Si algo falla, se mantiene el reloj original de GNOME
-                logError(e, 'two-line-clock');
+            if (force || data.tooltip !== tooltip) {
+                data.label.set_tooltip_text(tooltip);
+                data.tooltip = tooltip;
             }
         }
     }
