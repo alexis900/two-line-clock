@@ -86,3 +86,22 @@ package manager, no test suite, no CI, no lint config. Keep it that way.
   `git fetch --tags`.
 - Public repo `github.com/alexis900/two-line-clock`; `gh` is authenticated as
   `alexis900`.
+
+## Mandatory rules
+
+- **Always test locally**: Before running `git add`, `git commit`, `git push`, or uploading any version to extensions.gnome.org, changes must be tested locally.
+- **Install and validate**: After modifying code, run `./build.sh pack` and `./build.sh install`. Enable/disable the extension if needed and check logs with `journalctl --user -n 30 --no-pager` to ensure there are no errors.
+- **Check preferences**: If `prefs.js` is modified, open the extension preferences and verify they load correctly without `SyntaxError`.
+- **Do not upload without validation**: Never upload a zip to eGO or push without having tested locally first.
+
+## Git best practices
+
+- **Conventional commits**: Use [Conventional Commits](https://www.conventionalcommits.org/) style: `type(scope): description`. Common types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`, `build`, `ci`.
+- **Short and descriptive**: Commit messages must always be in English, following Conventional Commits (e.g. `fix: correct tooltip error on St.Label` or `feat(prefs): add new presets`).
+- **Atomic commits**: Each commit should contain a single logical change. Avoid mixing unrelated changes in one commit.
+- **Small commits**: Prefer small, focused commits that are easy to review and revert.
+- **Descriptive scope**: Use scope when helpful (e.g. `extension`, `prefs`, `build`, `i18n`).
+- **No WIP commits**: Avoid committing work-in-progress. If necessary, squash before pushing.
+- **Reference issues**: If fixing a reported issue, reference it when relevant (e.g. `fix: corregir crash en GNOME 51 (#123)`).
+- **Significant changes**: Update `CHANGELOG.md`, `README.md`/`README.es.md` when adding features or making breaking changes.
+- **Coherent history**: Keep commit history clean and meaningful. Use `git rebase` carefully to tidy up local commits before pushing if appropriate.
